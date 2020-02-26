@@ -1,0 +1,1 @@
+web: gunicorn calc1.wsgi

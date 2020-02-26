@@ -1,0 +1,453 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CGPA calculator</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'css/mdb.min.css'%}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'css/style.min.css'%}" rel="stylesheet">
+    <link rel="shortcut icon" href="{%static 'img/favicon.ico' %}">
+    <style>
+        body{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+        }
+        #container{
+            font-weight: bold;
+        }
+       #blu{
+        font-weight: bold;"
+       }
+        .box{
+            border: solid 10px grey;
+            padding:10px 20px;
+            background-color: lavender;
+            margin-bottom: 0px;
+        }
+        #res{
+            text-align: center;
+        }
+        hr{
+           border-top:solid 2px grey;
+        }
+       
+    </style>
+</head>
+<body bgcolor='emeka'>
+    <div id= container class= 'container'>
+        <div class='row'>
+            <div class="col-12">
+                <br><h5 id="blu" style="text-align:center">Welcome to the CGPA calculator by the <i style="color:red;">i-wizard</i></h5><hr><br>
+                
+                <div class='box'>
+                    <h3 id='res'>Your CGPA is: <b style="color:green;font-size:32px;margin-top:0px">
+                        {{result}}</b></h3>
+                </div>
+                {% for message in messages %}
+      <h3 style="color:green;font-size:18px"><b>{{message}}</b></h3>
+      {% endfor %}<br><br>
+
+
+                <!--first form-->
+                    <label for="che">How many courses do you want to check for?</label><br>
+                    <input name="che" type="radio" id="four" value="four">4&nbsp;&nbsp;&nbsp;&nbsp;<input name="che" type="radio"id="five" value="five">5&nbsp;&nbsp;&nbsp;&nbsp;<input name="che" id="six" type="radio" value="six">6&nbsp;&nbsp;&nbsp;&nbsp;<input name="che" type="radio" id="seven" value="seven">7&nbsp;&nbsp;&nbsp;&nbsp;<input name="che" type="radio" id="eight" value="eight">8&nbsp;&nbsp;&nbsp;&nbsp;<input name="che" type="radio" id="nine" value="nine">9&nbsp;&nbsp;&nbsp;&nbsp;<input name="che" type="radio" id="ten" value="ten">10&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input name="che" type="radio" id="eleven" value="eleven">11<br>
+                    <button  id ='firstbtn' onclick="firstact()" value="Submit" style="background-color:lightgreen;padding:10px 7px;">Proceed</button><br><br>
+                    <!--end of first form-->
+                    
+            </div>
+            
+            <div class="col-12">
+             
+                    
+               
+                <!--main calclator-->
+                <div>
+                
+                <!--fourth form-->
+                <div id="fourth" style="display:none;">
+                    <form action="fourth" method="POST">
+                        {%csrf_token%}
+                        
+                        1. <label for="sco1">Select your result</label><br>
+                        <input name="sco1" type="radio" value="5">A&nbsp;&nbsp;<input name="sco1" type="radio" value="4">B &nbsp;&nbsp;<input name="sco1" type="radio" value="3">C&nbsp;&nbsp;<input name="sco1" type="radio" value="2">D&nbsp;&nbsp; <input name="sco1" type="radio" value="1">E&nbsp;&nbsp; <input name="sco1" type="radio" value="0" required>F<br>
+                        <input name="num1" type="number" class="formsix" placeholder='Enter credit unit'required> <br><br>
+                        2. <label for="sco2">Select your result</label><br>
+                        <input name="sco2" type="radio"  value="5">A&nbsp;&nbsp;<input name="sco2" type="radio" value="4">B &nbsp;&nbsp;<input name="sco2" type="radio" value="3">C&nbsp;&nbsp;<input name="sco2" type="radio" value="2">D&nbsp;&nbsp; <input name="sco2" type="radio" value="1">E &nbsp;&nbsp;<input name="sco2" type="radio" value="0"required>F<br>
+                        <input name="num2" type="number" class="formsix" required placeholder='Enter credit unit'><br><br>
+                        3. <label for="sco3">Select your result</label><br>
+                        <input name="sco3" type="radio" value="5">A&nbsp;&nbsp;<input name="sco3" type="radio" value="4">B&nbsp;&nbsp; <input name="sco3" type="radio" value="3">C&nbsp;&nbsp;<input name="sco3" type="radio" value="2">D &nbsp;&nbsp;<input name="sco3" type="radio" value="1">E&nbsp;&nbsp; <input name="sco3" type="radio" value="0"required>F<br>
+                        <input name="num3" type="number" class="formsix"  required  placeholder='Enter credit unit'><br><br>
+                        4. <label for="sco4">Select your result</label><br>
+                        <input name="sco4" type="radio" value="5">A&nbsp;&nbsp;<input name="sco4" type="radio" value="4">B &nbsp;&nbsp;<input name="sco4" type="radio" value="3">C&nbsp;&nbsp;<input name="sco4" type="radio" value="2">D &nbsp;&nbsp;<input name="sco4" type="radio" value="1">E &nbsp;&nbsp;<input name="sco4" type="radio" value="0"required>F<br>
+                        <input name="num4" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                        <input type="submit" onclick="finalact()" value="Calculate" style="background-color:lightgreen;padding:10px;font-size:20px">
+                    </form><br>
+                   </div>
+                <!--end of fourth form-->
+
+                <!--fifth form-->
+                <div id="fifth" style="display:none;">
+                    <form action="fifth" method="POST">
+                        {%csrf_token%}
+                        1. <label for="sco1">Select your result</label><br>
+                        <input name="sco1" type="radio" value="5">A&nbsp;&nbsp;<input name="sco1" type="radio" value="4">B &nbsp;&nbsp;<input name="sco1" type="radio" value="3">C&nbsp;&nbsp;<input name="sco1" type="radio" value="2">D&nbsp;&nbsp; <input name="sco1" type="radio" value="1">E&nbsp;&nbsp; <input name="sco1" type="radio" value="0" required>F<br>
+                        <input name="num1" type="number" class="formsix" placeholder='Enter credit unit'required> <br><br>
+                        2. <label for="sco2">Select your result</label><br>
+                        <input name="sco2" type="radio"  value="5">A&nbsp;&nbsp;<input name="sco2" type="radio" value="4">B &nbsp;&nbsp;<input name="sco2" type="radio" value="3">C&nbsp;&nbsp;<input name="sco2" type="radio" value="2">D&nbsp;&nbsp; <input name="sco2" type="radio" value="1">E &nbsp;&nbsp;<input name="sco2" type="radio" value="0"required>F<br>
+                        <input name="num2" type="number" class="formsix" required placeholder='Enter credit unit'><br><br>
+                        3. <label for="sco3">Select your result</label><br>
+                        <input name="sco3" type="radio" value="5">A&nbsp;&nbsp;<input name="sco3" type="radio" value="4">B&nbsp;&nbsp; <input name="sco3" type="radio" value="3">C&nbsp;&nbsp;<input name="sco3" type="radio" value="2">D &nbsp;&nbsp;<input name="sco3" type="radio" value="1">E&nbsp;&nbsp; <input name="sco3" type="radio" value="0"required>F<br>
+                        <input name="num3" type="number" class="formsix"  required  placeholder='Enter credit unit'><br><br>
+                        4. <label for="sco4">Select your result</label><br>
+                        <input name="sco4" type="radio" value="5">A&nbsp;&nbsp;<input name="sco4" type="radio" value="4">B &nbsp;&nbsp;<input name="sco4" type="radio" value="3">C&nbsp;&nbsp;<input name="sco4" type="radio" value="2">D &nbsp;&nbsp;<input name="sco4" type="radio" value="1">E &nbsp;&nbsp;<input name="sco4" type="radio" value="0"required>F<br>
+                        <input name="num4" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                        5. <label for="sco5">Select your result</label><br>
+                        <input name="sco5" type="radio" value="5">A&nbsp;&nbsp;<input name="sco5" type="radio" value="4">B&nbsp;&nbsp; <input name="sco5" type="radio" value="3">C&nbsp;&nbsp;<input name="sco5" type="radio" value="2">D &nbsp;&nbsp;<input name="sco5" type="radio" value="1">E &nbsp;&nbsp;<input name="sco5" type="radio" value="0"required>F<br>
+                        <input name="num5" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                        <input type="submit" onclick="finalact()" value="Calculate" style="background-color:lightgreen;padding:10px;font-size:20px">
+                    </form><br>
+                   </div>
+                   <!--end of fifth form-->
+
+
+                <!--sixth form-->
+                <div id="sixthh" style="display:none;">
+                <form action="add" method="POST">
+                    {%csrf_token%}
+                    1. <label for="sco1">Select your result</label><br>
+                    <input name="sco1" type="radio" value="5">A&nbsp;&nbsp;<input name="sco1" type="radio" value="4">B &nbsp;&nbsp;<input name="sco1" type="radio" value="3">C&nbsp;&nbsp;<input name="sco1" type="radio" value="2">D&nbsp;&nbsp; <input name="sco1" type="radio" value="1">E&nbsp;&nbsp; <input name="sco1" type="radio" value="0" required>F<br>
+                    <input name="num1" type="number" class="formsix" placeholder='Enter credit unit'required> <br><br>
+                    2. <label for="sco2">Select your result</label><br>
+                    <input name="sco2" type="radio"  value="5">A&nbsp;&nbsp;<input name="sco2" type="radio" value="4">B &nbsp;&nbsp;<input name="sco2" type="radio" value="3">C&nbsp;&nbsp;<input name="sco2" type="radio" value="2">D&nbsp;&nbsp; <input name="sco2" type="radio" value="1">E &nbsp;&nbsp;<input name="sco2" type="radio" value="0"required>F<br>
+                    <input name="num2" type="number" class="formsix" required placeholder='Enter credit unit'><br><br>
+                    3. <label for="sco3">Select your result</label><br>
+                    <input name="sco3" type="radio" value="5">A&nbsp;&nbsp;<input name="sco3" type="radio" value="4">B&nbsp;&nbsp; <input name="sco3" type="radio" value="3">C&nbsp;&nbsp;<input name="sco3" type="radio" value="2">D &nbsp;&nbsp;<input name="sco3" type="radio" value="1">E&nbsp;&nbsp; <input name="sco3" type="radio" value="0"required>F<br>
+                    <input name="num3" type="number" class="formsix"  required  placeholder='Enter credit unit'><br><br>
+                    4. <label for="sco4">Select your result</label><br>
+                    <input name="sco4" type="radio" value="5">A&nbsp;&nbsp;<input name="sco4" type="radio" value="4">B &nbsp;&nbsp;<input name="sco4" type="radio" value="3">C&nbsp;&nbsp;<input name="sco4" type="radio" value="2">D &nbsp;&nbsp;<input name="sco4" type="radio" value="1">E &nbsp;&nbsp;<input name="sco4" type="radio" value="0"required>F<br>
+                    <input name="num4" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    5. <label for="sco5">Select your result</label><br>
+                    <input name="sco5" type="radio" value="5">A&nbsp;&nbsp;<input name="sco5" type="radio" value="4">B&nbsp;&nbsp; <input name="sco5" type="radio" value="3">C&nbsp;&nbsp;<input name="sco5" type="radio" value="2">D &nbsp;&nbsp;<input name="sco5" type="radio" value="1">E &nbsp;&nbsp;<input name="sco5" type="radio" value="0"required>F<br>
+                    <input name="num5" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    6. <label for="sco6">Select your result</label><br>
+                    <input name="sco6" type="radio" value="5">A&nbsp;&nbsp;<input name="sco6" type="radio" value="4">B &nbsp;&nbsp;<input name="sco6" type="radio" value="3">C&nbsp;&nbsp;<input name="sco6" type="radio" value="2">D &nbsp;&nbsp;<input name="sco6" type="radio" value="1">E &nbsp;&nbsp;<input name="sco6" type="radio" value="0"required>F<br>
+                    <input name="num6" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    <input type="submit" onclick="finalact()" value="Calculate" style="background-color:lightgreen;padding:10px;font-size:20px">
+                </form><br>
+               </div>
+               <!--end of sixth form-->
+
+               <!--seventh form-->
+               <div id="seventh" style="display:none;">
+                <form action="seventh" method="POST">
+                    {%csrf_token%}
+                    1. <label for="sco1">Select your result</label><br>
+                    <input name="sco1" type="radio" value="5">A&nbsp;&nbsp;<input name="sco1" type="radio" value="4">B &nbsp;&nbsp;<input name="sco1" type="radio" value="3">C&nbsp;&nbsp;<input name="sco1" type="radio" value="2">D&nbsp;&nbsp; <input name="sco1" type="radio" value="1">E&nbsp;&nbsp; <input name="sco1" type="radio" value="0" required>F<br>
+                    <input name="num1" type="number" class="formsix" placeholder='Enter credit unit'required> <br><br>
+                    2. <label for="sco2">Select your result</label><br>
+                    <input name="sco2" type="radio"  value="5">A&nbsp;&nbsp;<input name="sco2" type="radio" value="4">B &nbsp;&nbsp;<input name="sco2" type="radio" value="3">C&nbsp;&nbsp;<input name="sco2" type="radio" value="2">D&nbsp;&nbsp; <input name="sco2" type="radio" value="1">E &nbsp;&nbsp;<input name="sco2" type="radio" value="0"required>F<br>
+                    <input name="num2" type="number" class="formsix" required placeholder='Enter credit unit'><br><br>
+                    3. <label for="sco3">Select your result</label><br>
+                    <input name="sco3" type="radio" value="5">A&nbsp;&nbsp;<input name="sco3" type="radio" value="4">B&nbsp;&nbsp; <input name="sco3" type="radio" value="3">C&nbsp;&nbsp;<input name="sco3" type="radio" value="2">D &nbsp;&nbsp;<input name="sco3" type="radio" value="1">E&nbsp;&nbsp; <input name="sco3" type="radio" value="0"required>F<br>
+                    <input name="num3" type="number" class="formsix"  required  placeholder='Enter credit unit'><br><br>
+                    4. <label for="sco4">Select your result</label><br>
+                    <input name="sco4" type="radio" value="5">A&nbsp;&nbsp;<input name="sco4" type="radio" value="4">B &nbsp;&nbsp;<input name="sco4" type="radio" value="3">C&nbsp;&nbsp;<input name="sco4" type="radio" value="2">D &nbsp;&nbsp;<input name="sco4" type="radio" value="1">E &nbsp;&nbsp;<input name="sco4" type="radio" value="0"required>F<br>
+                    <input name="num4" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    5. <label for="sco5">Select your result</label><br>
+                    <input name="sco5" type="radio" value="5">A&nbsp;&nbsp;<input name="sco5" type="radio" value="4">B&nbsp;&nbsp; <input name="sco5" type="radio" value="3">C&nbsp;&nbsp;<input name="sco5" type="radio" value="2">D &nbsp;&nbsp;<input name="sco5" type="radio" value="1">E &nbsp;&nbsp;<input name="sco5" type="radio" value="0"required>F<br>
+                    <input name="num5" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    6. <label for="sco6">Select your result</label><br>
+                    <input name="sco6" type="radio" value="5">A&nbsp;&nbsp;<input name="sco6" type="radio" value="4">B &nbsp;&nbsp;<input name="sco6" type="radio" value="3">C&nbsp;&nbsp;<input name="sco6" type="radio" value="2">D &nbsp;&nbsp;<input name="sco6" type="radio" value="1">E &nbsp;&nbsp;<input name="sco6" type="radio" value="0"required>F<br>
+                    <input name="num6" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    7. <label for="sco7">Select your result</label><br>
+                    <input name="sco7" type="radio" value="5">A &nbsp;&nbsp;<input name="sco7" type="radio" value="4">B &nbsp;&nbsp;<input name="sco7" type="radio" value="3">C&nbsp;&nbsp;<input name="sco7" type="radio" value="2">D&nbsp;&nbsp; <input name="sco7" type="radio" value="1">E &nbsp;&nbsp;<input name="sco7" type="radio" value="0"required>F<br>
+                    <input name="num7" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    <input type="submit" onclick="finalact()" value="Calculate" style="background-color:lightgreen;padding:10px;font-size:20px">
+                </form><br>
+               </div>
+               <!--end of seventh form-->
+               <div id="eighth" style="display:none;">
+                <form action="eighth" method="POST">
+                    {%csrf_token%}
+                    1. <label for="sco1">Select your result</label><br>
+                    <input name="sco1" type="radio" value="5">A&nbsp;&nbsp;<input name="sco1" type="radio" value="4">B &nbsp;&nbsp;<input name="sco1" type="radio" value="3">C&nbsp;&nbsp;<input name="sco1" type="radio" value="2">D&nbsp;&nbsp; <input name="sco1" type="radio" value="1">E&nbsp;&nbsp; <input name="sco1" type="radio" value="0" required>F<br>
+                    <input name="num1" type="number" class="formsix" placeholder='Enter credit unit'required> <br><br>
+                    2. <label for="sco2">Select your result</label><br>
+                    <input name="sco2" type="radio"  value="5">A&nbsp;&nbsp;<input name="sco2" type="radio" value="4">B &nbsp;&nbsp;<input name="sco2" type="radio" value="3">C&nbsp;&nbsp;<input name="sco2" type="radio" value="2">D&nbsp;&nbsp; <input name="sco2" type="radio" value="1">E &nbsp;&nbsp;<input name="sco2" type="radio" value="0"required>F<br>
+                    <input name="num2" type="number" class="formsix" required placeholder='Enter credit unit'><br><br>
+                    3. <label for="sco3">Select your result</label><br>
+                    <input name="sco3" type="radio" value="5">A&nbsp;&nbsp;<input name="sco3" type="radio" value="4">B&nbsp;&nbsp; <input name="sco3" type="radio" value="3">C&nbsp;&nbsp;<input name="sco3" type="radio" value="2">D &nbsp;&nbsp;<input name="sco3" type="radio" value="1">E&nbsp;&nbsp; <input name="sco3" type="radio" value="0"required>F<br>
+                    <input name="num3" type="number" class="formsix"  required  placeholder='Enter credit unit'><br><br>
+                    4. <label for="sco4">Select your result</label><br>
+                    <input name="sco4" type="radio" value="5">A&nbsp;&nbsp;<input name="sco4" type="radio" value="4">B &nbsp;&nbsp;<input name="sco4" type="radio" value="3">C&nbsp;&nbsp;<input name="sco4" type="radio" value="2">D &nbsp;&nbsp;<input name="sco4" type="radio" value="1">E &nbsp;&nbsp;<input name="sco4" type="radio" value="0"required>F<br>
+                    <input name="num4" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    5. <label for="sco5">Select your result</label><br>
+                    <input name="sco5" type="radio" value="5">A&nbsp;&nbsp;<input name="sco5" type="radio" value="4">B&nbsp;&nbsp; <input name="sco5" type="radio" value="3">C&nbsp;&nbsp;<input name="sco5" type="radio" value="2">D &nbsp;&nbsp;<input name="sco5" type="radio" value="1">E &nbsp;&nbsp;<input name="sco5" type="radio" value="0"required>F<br>
+                    <input name="num5" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    6. <label for="sco6">Select your result</label><br>
+                    <input name="sco6" type="radio" value="5">A&nbsp;&nbsp;<input name="sco6" type="radio" value="4">B &nbsp;&nbsp;<input name="sco6" type="radio" value="3">C&nbsp;&nbsp;<input name="sco6" type="radio" value="2">D &nbsp;&nbsp;<input name="sco6" type="radio" value="1">E &nbsp;&nbsp;<input name="sco6" type="radio" value="0"required>F<br>
+                    <input name="num6" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    7. <label for="sco7">Select your result</label><br>
+                    <input name="sco7" type="radio" value="5">A &nbsp;&nbsp;<input name="sco7" type="radio" value="4">B &nbsp;&nbsp;<input name="sco7" type="radio" value="3">C&nbsp;&nbsp;<input name="sco7" type="radio" value="2">D&nbsp;&nbsp; <input name="sco7" type="radio" value="1">E &nbsp;&nbsp;<input name="sco7" type="radio" value="0"required>F<br>
+                    <input name="num7" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    8. <label for="sco8">Select your result</label><br>
+                    <input name="sco8" type="radio" value="5">A&nbsp;&nbsp;<input name="sco8" type="radio" value="4">B &nbsp;&nbsp;<input name="sco8" type="radio" value="3">C&nbsp;&nbsp;<input name="sco8" type="radio" value="2">D&nbsp;&nbsp; <input name="sco8" type="radio" value="1">E &nbsp;&nbsp;<input name="sco8" type="radio" value="0"required>F&nbsp;<br>
+                    <input name="num8" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    <input type="submit" onclick="finalact()" value="Calculate" style="background-color:lightgreen;padding:10px;font-size:20px">
+                </form><br>
+               </div>
+               <div id="ninth" style="display:none;">
+                <form action="ninth" method="POST">
+                    {%csrf_token%}
+                    1. <label for="sco1">Select your result</label><br>
+                    <input name="sco1" type="radio" value="5">A&nbsp;&nbsp;<input name="sco1" type="radio" value="4">B &nbsp;&nbsp;<input name="sco1" type="radio" value="3">C&nbsp;&nbsp;<input name="sco1" type="radio" value="2">D&nbsp;&nbsp; <input name="sco1" type="radio" value="1">E&nbsp;&nbsp; <input name="sco1" type="radio" value="0" required>F<br>
+                    <input name="num1" type="number" class="formsix" placeholder='Enter credit unit'required> <br><br>
+                    2. <label for="sco2">Select your result</label><br>
+                    <input name="sco2" type="radio"  value="5">A&nbsp;&nbsp;<input name="sco2" type="radio" value="4">B &nbsp;&nbsp;<input name="sco2" type="radio" value="3">C&nbsp;&nbsp;<input name="sco2" type="radio" value="2">D&nbsp;&nbsp; <input name="sco2" type="radio" value="1">E &nbsp;&nbsp;<input name="sco2" type="radio" value="0"required>F<br>
+                    <input name="num2" type="number" class="formsix" required placeholder='Enter credit unit'><br><br>
+                    3. <label for="sco3">Select your result</label><br>
+                    <input name="sco3" type="radio" value="5">A&nbsp;&nbsp;<input name="sco3" type="radio" value="4">B&nbsp;&nbsp; <input name="sco3" type="radio" value="3">C&nbsp;&nbsp;<input name="sco3" type="radio" value="2">D &nbsp;&nbsp;<input name="sco3" type="radio" value="1">E&nbsp;&nbsp; <input name="sco3" type="radio" value="0"required>F<br>
+                    <input name="num3" type="number" class="formsix"  required  placeholder='Enter credit unit'><br><br>
+                    4. <label for="sco4">Select your result</label><br>
+                    <input name="sco4" type="radio" value="5">A&nbsp;&nbsp;<input name="sco4" type="radio" value="4">B &nbsp;&nbsp;<input name="sco4" type="radio" value="3">C&nbsp;&nbsp;<input name="sco4" type="radio" value="2">D &nbsp;&nbsp;<input name="sco4" type="radio" value="1">E &nbsp;&nbsp;<input name="sco4" type="radio" value="0"required>F<br>
+                    <input name="num4" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    5. <label for="sco5">Select your result</label><br>
+                    <input name="sco5" type="radio" value="5">A&nbsp;&nbsp;<input name="sco5" type="radio" value="4">B&nbsp;&nbsp; <input name="sco5" type="radio" value="3">C&nbsp;&nbsp;<input name="sco5" type="radio" value="2">D &nbsp;&nbsp;<input name="sco5" type="radio" value="1">E &nbsp;&nbsp;<input name="sco5" type="radio" value="0"required>F<br>
+                    <input name="num5" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    6. <label for="sco6">Select your result</label><br>
+                    <input name="sco6" type="radio" value="5">A&nbsp;&nbsp;<input name="sco6" type="radio" value="4">B &nbsp;&nbsp;<input name="sco6" type="radio" value="3">C&nbsp;&nbsp;<input name="sco6" type="radio" value="2">D &nbsp;&nbsp;<input name="sco6" type="radio" value="1">E &nbsp;&nbsp;<input name="sco6" type="radio" value="0"required>F<br>
+                    <input name="num6" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    7. <label for="sco7">Select your result</label><br>
+                    <input name="sco7" type="radio" value="5">A &nbsp;&nbsp;<input name="sco7" type="radio" value="4">B &nbsp;&nbsp;<input name="sco7" type="radio" value="3">C&nbsp;&nbsp;<input name="sco7" type="radio" value="2">D&nbsp;&nbsp; <input name="sco7" type="radio" value="1">E &nbsp;&nbsp;<input name="sco7" type="radio" value="0"required>F<br>
+                    <input name="num7" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    8. <label for="sco8">Select your result</label><br>
+                    <input name="sco8" type="radio" value="5">A&nbsp;&nbsp;<input name="sco8" type="radio" value="4">B &nbsp;&nbsp;<input name="sco8" type="radio" value="3">C&nbsp;&nbsp;<input name="sco8" type="radio" value="3">D&nbsp;&nbsp; <input name="sco8" type="radio" value="1">E &nbsp;&nbsp;<input name="sco8" type="radio" value="0"required>F&nbsp;<br>
+                    <input name="num8" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    9. <label for="sco9">Select your result</label><br>
+                    <input name="sco9" type="radio" value="5">A&nbsp;&nbsp;<input name="sco9" type="radio" value="4">B &nbsp;&nbsp;<input name="sco9" type="radio" value="4">C&nbsp;&nbsp;<input name="sco9" type="radio" value="3">D&nbsp;&nbsp; <input name="sco9" type="radio" value="1">E &nbsp;&nbsp;<input name="sco9" type="radio" value="0"required>F&nbsp;<br>
+                    <input name="num9" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    <input type="submit" onclick="finalact()" value="Calculate" style="background-color:lightgreen;padding:10px;font-size:20px">
+                </form><br>
+               </div>
+               <div id="tenth" style="display:none;">
+                <form action="tenth" method="POST">
+                    {%csrf_token%}
+                    1. <label for="sco1">Select your result</label><br>
+                    <input name="sco1" type="radio" value="5">A&nbsp;&nbsp;<input name="sco1" type="radio" value="4">B &nbsp;&nbsp;<input name="sco1" type="radio" value="3">C&nbsp;&nbsp;<input name="sco1" type="radio" value="2">D&nbsp;&nbsp; <input name="sco1" type="radio" value="1">E&nbsp;&nbsp; <input name="sco1" type="radio" value="0" required>F<br>
+                    <input name="num1" type="number" class="formsix" placeholder='Enter credit unit'required> <br><br>
+                    2. <label for="sco2">Select your result</label><br>
+                    <input name="sco2" type="radio"  value="5">A&nbsp;&nbsp;<input name="sco2" type="radio" value="4">B &nbsp;&nbsp;<input name="sco2" type="radio" value="3">C&nbsp;&nbsp;<input name="sco2" type="radio" value="2">D&nbsp;&nbsp; <input name="sco2" type="radio" value="1">E &nbsp;&nbsp;<input name="sco2" type="radio" value="0"required>F<br>
+                    <input name="num2" type="number" class="formsix" required placeholder='Enter credit unit'><br><br>
+                    3. <label for="sco3">Select your result</label><br>
+                    <input name="sco3" type="radio" value="5">A&nbsp;&nbsp;<input name="sco3" type="radio" value="4">B&nbsp;&nbsp; <input name="sco3" type="radio" value="3">C&nbsp;&nbsp;<input name="sco3" type="radio" value="2">D &nbsp;&nbsp;<input name="sco3" type="radio" value="1">E&nbsp;&nbsp; <input name="sco3" type="radio" value="0"required>F<br>
+                    <input name="num3" type="number" class="formsix"  required  placeholder='Enter credit unit'><br><br>
+                    4. <label for="sco4">Select your result</label><br>
+                    <input name="sco4" type="radio" value="5">A&nbsp;&nbsp;<input name="sco4" type="radio" value="4">B &nbsp;&nbsp;<input name="sco4" type="radio" value="3">C&nbsp;&nbsp;<input name="sco4" type="radio" value="2">D &nbsp;&nbsp;<input name="sco4" type="radio" value="1">E &nbsp;&nbsp;<input name="sco4" type="radio" value="0"required>F<br>
+                    <input name="num4" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    5. <label for="sco5">Select your result</label><br>
+                    <input name="sco5" type="radio" value="5">A&nbsp;&nbsp;<input name="sco5" type="radio" value="4">B&nbsp;&nbsp; <input name="sco5" type="radio" value="3">C&nbsp;&nbsp;<input name="sco5" type="radio" value="2">D &nbsp;&nbsp;<input name="sco5" type="radio" value="1">E &nbsp;&nbsp;<input name="sco5" type="radio" value="0"required>F<br>
+                    <input name="num5" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    6. <label for="sco6">Select your result</label><br>
+                    <input name="sco6" type="radio" value="5">A&nbsp;&nbsp;<input name="sco6" type="radio" value="4">B &nbsp;&nbsp;<input name="sco6" type="radio" value="3">C&nbsp;&nbsp;<input name="sco6" type="radio" value="2">D &nbsp;&nbsp;<input name="sco6" type="radio" value="1">E &nbsp;&nbsp;<input name="sco6" type="radio" value="0"required>F<br>
+                    <input name="num6" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    7. <label for="sco7">Select your result</label><br>
+                    <input name="sco7" type="radio" value="5">A &nbsp;&nbsp;<input name="sco7" type="radio" value="4">B &nbsp;&nbsp;<input name="sco7" type="radio" value="3">C&nbsp;&nbsp;<input name="sco7" type="radio" value="2">D&nbsp;&nbsp; <input name="sco7" type="radio" value="1">E &nbsp;&nbsp;<input name="sco7" type="radio" value="0"required>F<br>
+                    <input name="num7" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    8. <label for="sco8">Select your result</label><br>
+                    <input name="sco8" type="radio" value="5">A&nbsp;&nbsp;<input name="sco8" type="radio" value="4">B &nbsp;&nbsp;<input name="sco8" type="radio" value="3">C&nbsp;&nbsp;<input name="sco8" type="radio" value="2">D&nbsp;&nbsp; <input name="sco8" type="radio" value="1">E &nbsp;&nbsp;<input name="sco8" type="radio" value="0"required>F&nbsp;<br>
+                    <input name="num8" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    9. <label for="sco9">Select your result</label><br>
+                    <input name="sco9" type="radio" value="5">A&nbsp;&nbsp;<input name="sco9" type="radio" value="4">B &nbsp;&nbsp;<input name="sco9" type="radio" value="3">C&nbsp;&nbsp;<input name="sco9" type="radio" value="2">D&nbsp;&nbsp; <input name="sco9" type="radio" value="1">E &nbsp;&nbsp;<input name="sco9" type="radio" value="0"required>F&nbsp;<br>
+                    <input name="num9" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    10. <label for="sco10">Select your result</label><br>
+                    <input name="sco10" type="radio" value="5">A&nbsp;&nbsp;<input name="sco10" type="radio" value="4">B &nbsp;&nbsp;<input name="sco10" type="radio" value="3">C&nbsp;&nbsp;<input name="sco10" type="radio" value="2">D&nbsp;&nbsp; <input name="sco10" type="radio" value="1">E &nbsp;&nbsp;<input name="sco10" type="radio" value="0"required>F&nbsp;<br>
+                    <input name="num10" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    <input type="submit" onclick="finalact()" value="Calculate" style="background-color:lightgreen;padding:10px;font-size:20px">
+                </form><br>
+               </div>
+               <div id="eleventh" style="display:none;">
+                <form action="eleventh" method="POST">
+                    {%csrf_token%}
+                    1. <label for="sco1">Select your result</label><br>
+                    <input name="sco1" type="radio" value="5">A&nbsp;&nbsp;<input name="sco1" type="radio" value="4">B &nbsp;&nbsp;<input name="sco1" type="radio" value="3">C&nbsp;&nbsp;<input name="sco1" type="radio" value="2">D&nbsp;&nbsp; <input name="sco1" type="radio" value="1">E&nbsp;&nbsp; <input name="sco1" type="radio" value="0" required>F<br>
+                    <input name="num1" type="number" class="formsix" placeholder='Enter credit unit'required> <br><br>
+                    2. <label for="sco2">Select your result</label><br>
+                    <input name="sco2" type="radio"  value="5">A&nbsp;&nbsp;<input name="sco2" type="radio" value="4">B &nbsp;&nbsp;<input name="sco2" type="radio" value="3">C&nbsp;&nbsp;<input name="sco2" type="radio" value="2">D&nbsp;&nbsp; <input name="sco2" type="radio" value="1">E &nbsp;&nbsp;<input name="sco2" type="radio" value="0"required>F<br>
+                    <input name="num2" type="number" class="formsix" required placeholder='Enter credit unit'><br><br>
+                    3. <label for="sco3">Select your result</label><br>
+                    <input name="sco3" type="radio" value="5">A&nbsp;&nbsp;<input name="sco3" type="radio" value="4">B&nbsp;&nbsp; <input name="sco3" type="radio" value="3">C&nbsp;&nbsp;<input name="sco3" type="radio" value="2">D &nbsp;&nbsp;<input name="sco3" type="radio" value="1">E&nbsp;&nbsp; <input name="sco3" type="radio" value="0"required>F<br>
+                    <input name="num3" type="number" class="formsix"  required  placeholder='Enter credit unit'><br><br>
+                    4. <label for="sco4">Select your result</label><br>
+                    <input name="sco4" type="radio" value="5">A&nbsp;&nbsp;<input name="sco4" type="radio" value="4">B &nbsp;&nbsp;<input name="sco4" type="radio" value="3">C&nbsp;&nbsp;<input name="sco4" type="radio" value="2">D &nbsp;&nbsp;<input name="sco4" type="radio" value="1">E &nbsp;&nbsp;<input name="sco4" type="radio" value="0"required>F<br>
+                    <input name="num4" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    5. <label for="sco5">Select your result</label><br>
+                    <input name="sco5" type="radio" value="5">A&nbsp;&nbsp;<input name="sco5" type="radio" value="4">B&nbsp;&nbsp; <input name="sco5" type="radio" value="3">C&nbsp;&nbsp;<input name="sco5" type="radio" value="2">D &nbsp;&nbsp;<input name="sco5" type="radio" value="1">E &nbsp;&nbsp;<input name="sco5" type="radio" value="0"required>F<br>
+                    <input name="num5" type="number" class="formsix" required  placeholder='Enter credit unit'><br><br>
+                    6. <label for="sco6">Select your result</label><br>
+                    <input name="sco6" type="radio" value="5">A&nbsp;&nbsp;<input name="sco6" type="radio" value="4">B &nbsp;&nbsp;<input name="sco6" type="radio" value="3">C&nbsp;&nbsp;<input name="sco6" type="radio" value="2">D &nbsp;&nbsp;<input name="sco6" type="radio" value="1">E &nbsp;&nbsp;<input name="sco6" type="radio" value="0"required>F<br>
+                    <input name="num6" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    7. <label for="sco7">Select your result</label><br>
+                    <input name="sco7" type="radio" value="5">A &nbsp;&nbsp;<input name="sco7" type="radio" value="4">B &nbsp;&nbsp;<input name="sco7" type="radio" value="3">C&nbsp;&nbsp;<input name="sco7" type="radio" value="2">D&nbsp;&nbsp; <input name="sco7" type="radio" value="1">E &nbsp;&nbsp;<input name="sco7" type="radio" value="0"required>F<br>
+                    <input name="num7" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    8. <label for="sco8">Select your result</label><br>
+                    <input name="sco8" type="radio" value="5">A&nbsp;&nbsp;<input name="sco8" type="radio" value="4">B &nbsp;&nbsp;<input name="sco8" type="radio" value="3">C&nbsp;&nbsp;<input name="sco8" type="radio" value="2">D&nbsp;&nbsp; <input name="sco8" type="radio" value="1">E &nbsp;&nbsp;<input name="sco8" type="radio" value="0"required>F&nbsp;<br>
+                    <input name="num8" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    9. <label for="sco9">Select your result</label><br>
+                    <input name="sco9" type="radio" value="5">A&nbsp;&nbsp;<input name="sco9" type="radio" value="4">B &nbsp;&nbsp;<input name="sco9" type="radio" value="3">C&nbsp;&nbsp;<input name="sco9" type="radio" value="2">D&nbsp;&nbsp; <input name="sco9" type="radio" value="1">E &nbsp;&nbsp;<input name="sco9" type="radio" value="0"required>F&nbsp;<br>
+                    <input name="num9" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    10. <label for="sco10">Select your result</label><br>
+                    <input name="sco10" type="radio" value="5">A&nbsp;&nbsp;<input name="sco10" type="radio" value="4">B &nbsp;&nbsp;<input name="sco10" type="radio" value="3">C&nbsp;&nbsp;<input name="sco10" type="radio" value="2">D&nbsp;&nbsp; <input name="sco10" type="radio" value="1">E &nbsp;&nbsp;<input name="sco10" type="radio" value="0"required>F&nbsp;<br>
+                    <input name="num10" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    11. <label for="sco11">Select your result</label><br>
+                    <input name="sco11" type="radio" value="5">A&nbsp;&nbsp;<input name="sco11" type="radio" value="4">B &nbsp;&nbsp;<input name="sco11" type="radio" value="3">C&nbsp;&nbsp;<input name="sco11" type="radio" value="2">D&nbsp;&nbsp; <input name="sco11" type="radio" value="1">E &nbsp;&nbsp;<input name="sco11" type="radio" value="0"required>F&nbsp;<br>
+                    <input name="num11" type="number" class="formsix"  required placeholder='Enter credit unit'><br><br>
+                    <input type="submit" onclick="finalact()" value="Calculate" style="background-color:lightgreen;padding:10px;font-size:20px">
+                </form><br>
+               </div>
+            </div>
+            <!--end of main calculator-->
+            
+            </div>
+        </div>
+        
+    </div>
+    <hr>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p style="text-align:center"><b>This web app was designed by the <b style='color:red'>i-wizard</b> &copy; 2020</b></p>
+                
+            </div>
+            <div class="col-12">
+                <p style="text-align:center"><b>Contact<i class="fa fa-phone"></i>: <a href="tel:07069199170">+2347069199170</a></b></p>
+                
+            </div>
+            
+        </div>
+    </div>
+</footer>
+</body>
+<script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js '%}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'js/popper.min.js '%}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js '%}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+<script type="text/javascript">
+    function firstact(){
+        var four = document.getElementById("four");
+        var five = document.getElementById("five");
+        var six = document.getElementById("six");
+        var seven = document.getElementById("seven");
+        var eight = document.getElementById("eight");
+        var nine = document.getElementById("nine");
+        var ten = document.getElementById("ten");
+        var eleven = document.getElementById("eleven");
+        if(six.checked==true){
+            
+            document.getElementById("sixthh").style.display="inline"
+            document.getElementById("fourth").style.display="none"
+            document.getElementById("fifth").style.display="none"
+            document.getElementById("seventh").style.display="none"
+            document.getElementById("eighth").style.display="none"
+            document.getElementById("ninth").style.display="none"
+            document.getElementById("tenth").style.display="none"
+            document.getElementById("eleventh").style.display="none"
+            
+        }
+        else if(four.checked==true){
+           
+            document.getElementById("fourth").style.display="inline";
+            document.getElementById("sixthh").style.display="none"
+            document.getElementById("fifth").style.display="none"
+            document.getElementById("seventh").style.display="none"
+            document.getElementById("eighth").style.display="none"
+            document.getElementById("ninth").style.display="none"
+            document.getElementById("tenth").style.display="none"
+            document.getElementById("eleventh").style.display="none"
+        }
+        else if(five.checked==true){
+          
+            document.getElementById("fourth").style.display="none";
+            document.getElementById("ninth").style.display="none"
+            document.getElementById("sixthh").style.display="none"
+            document.getElementById("fifth").style.display="inline"
+            document.getElementById("seventh").style.display="none"
+            document.getElementById("eighth").style.display="none"
+            document.getElementById("tenth").style.display="none"
+            document.getElementById("eleventh").style.display="none"
+        }
+        else if(seven.checked==true){
+          
+            document.getElementById("fourth").style.display="none";
+            document.getElementById("sixthh").style.display="none"
+            document.getElementById("fifth").style.display="none"
+            document.getElementById("eighth").style.display="none"
+            document.getElementById("ninth").style.display="none"
+            document.getElementById("eleventh").style.display="none"
+            document.getElementById("tenth").style.display="none"
+            document.getElementById("seventh").style.display="inline"
+        }
+
+        else if(eight.checked==true){
+          
+            document.getElementById("fourth").style.display="none";
+            document.getElementById("ninth").style.display="none"
+            document.getElementById("sixthh").style.display="none"
+            document.getElementById("fifth").style.display="none"
+            document.getElementById("seventh").style.display="none"
+            document.getElementById("eleventh").style.display="none"
+            document.getElementById("tenth").style.display="none"
+            document.getElementById("eighth").style.display="inline"
+        }
+        else if(nine.checked==true){
+          
+            document.getElementById("fourth").style.display="none";
+            document.getElementById("sixthh").style.display="none"
+            document.getElementById("fifth").style.display="none"
+            document.getElementById("eleventh").style.display="none"
+            document.getElementById("seventh").style.display="none"
+            document.getElementById("eighth").style.display="none"
+            document.getElementById("tenth").style.display="none"
+            document.getElementById("ninth").style.display="inline"
+        }
+
+        else if(ten.checked==true){
+          
+            document.getElementById("fourth").style.display="none";
+            document.getElementById("sixthh").style.display="none"
+            document.getElementById("eleventh").style.display="none"
+            document.getElementById("fifth").style.display="none"
+            document.getElementById("seventh").style.display="none"
+            document.getElementById("eighth").style.display="none"
+            document.getElementById("ninth").style.display="none"
+            document.getElementById("tenth").style.display="inline"
+        }
+
+        else if(eleven.checked==true){
+          
+            document.getElementById("fourth").style.display="none";
+            document.getElementById("sixthh").style.display="none"
+            document.getElementById("fifth").style.display="none"
+            document.getElementById("seventh").style.display="none"
+            document.getElementById("eighth").style.display="none"
+            document.getElementById("ninth").style.display="none"
+            document.getElementById("tenth").style.display="none"
+            document.getElementById("eleventh").style.display="inline"
+
+        }
+    }
+    
+</script>
+</html>
+
